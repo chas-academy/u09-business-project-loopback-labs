@@ -1,0 +1,189 @@
+// Mimir Brand Colors
+$mimir-colors: (
+  fjord: #2c3e50,
+  // Deep fjord blue-gray - Primary
+  offwhite: #f8f9fa,
+  // Soft off-white - Background
+  stone: #6c757d,
+  // Warm stone gray - Text
+  teal: #20b2aa,
+  // Muted teal - Accent
+  saffron: #d4a574,
+  // Muted saffron - Warm accent
+  rose: #c47882,
+  // Dusty rose - Special moments
+  neutral:
+    (
+      50: #f8f9fa,
+      100: #f1f5f9,
+      200: #e2e8f0,
+      300: #cbd5e1,
+      400: #94a3b8,
+      500: #64748b,
+      600: #475569,
+      700: #334155,
+      800: #1e293b,
+      900: #0f172a,
+    ),
+);
+
+// Typography System
+$mimir-typography: (
+  family: (
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif,
+  ),
+  weights: (
+    regular: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+  ),
+  sizes: (
+    xs: 0.75rem,
+    // 12px
+    sm: 0.875rem,
+    // 14px
+    base: 1rem,
+    // 16px
+    lg: 1.125rem,
+    // 18px
+    xl: 1.25rem,
+    // 20px
+    "2xl": 1.5rem,
+    // 24px
+    "3xl": 1.875rem // 30px,
+  ),
+  line-height: (
+    tight: 1.2,
+    base: 1.5,
+    relaxed: 1.75,
+  ),
+);
+
+// Spacing System
+$mimir-spacing: (
+  1: 0.25rem,
+  // 4px
+  2: 0.5rem,
+  // 8px
+  3: 0.75rem,
+  // 12px
+  4: 1rem,
+  // 16px
+  5: 1.25rem,
+  // 20px
+  6: 1.5rem,
+  // 24px
+  8: 2rem,
+  // 32px
+  10: 2.5rem,
+  // 40px
+  12: 3rem,
+  // 48px
+  16: 4rem // 64px,
+);
+
+// Elevation & Shadows
+$mimir-shadows: (
+  sm: "0 1px 2px rgba(44, 62, 80, 0.05)",
+  md: "0 4px 6px rgba(44, 62, 80, 0.07)",
+  lg: "0 10px 15px rgba(44, 62, 80, 0.1)",
+);
+
+// Border Radius
+$mimir-radius: (
+  sm: 4px,
+  md: 6px,
+  lg: 8px,
+  xl: 12px,
+);
+
+// Transitions
+$mimir-transitions: (
+  fast: 150ms ease,
+  base: 200ms ease,
+  slow: 300ms ease,
+);
+
+// Brand Mixins
+@mixin mimir-card {
+  background-color: white;
+  border-radius: map-get($mimir-radius, lg);
+  box-shadow: map-get($mimir-shadows, sm);
+  transition: box-shadow map-get($mimir-transitions, base);
+
+  &:hover {
+    box-shadow: map-get($mimir-shadows, md);
+  }
+}
+
+@mixin mimir-gradient {
+  background: linear-gradient(
+    135deg,
+    map-get($mimir-colors, fjord) 0%,
+    map-get($mimir-colors, teal) 100%
+  );
+}
+
+@mixin mimir-focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(map-get($mimir-colors, teal), 0.3);
+}
+
+@mixin mimir-text-gradient {
+  @include mimir-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Interactive Elements
+@mixin mimir-button {
+  padding: map-get($mimir-spacing, 2) map-get($mimir-spacing, 4);
+  border-radius: map-get($mimir-radius, md);
+  font-weight: map-get($mimir-typography, weights, medium);
+  transition: all map-get($mimir-transitions, base);
+  cursor: pointer;
+  border: none;
+
+  &:focus {
+    @include mimir-focus-ring;
+  }
+
+  &--primary {
+    background-color: map-get($mimir-colors, fjord);
+    color: white;
+
+    &:hover {
+      background-color: darken(map-get($mimir-colors, fjord), 5%);
+    }
+  }
+
+  &--secondary {
+    background-color: map-get($mimir-colors, neutral, 100);
+    color: map-get($mimir-colors, fjord);
+
+    &:hover {
+      background-color: map-get($mimir-colors, neutral, 200);
+    }
+  }
+}
+
+// Data Visualization
+@mixin mimir-chart {
+  .chart-title {
+    font-size: map-get($mimir-typography, sizes, lg);
+    font-weight: map-get($mimir-typography, weights, semibold);
+    color: map-get($mimir-colors, fjord);
+    margin-bottom: map-get($mimir-spacing, 4);
+  }
+
+  .chart-legend {
+    font-size: map-get($mimir-typography, sizes, sm);
+    color: map-get($mimir-colors, stone);
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BarChart3, MessageSquare, Settings } from "lucide-react";
+import { MessageSquare, Settings, Lightbulb } from "lucide-react";
 import "@/styles/main.scss";
 
 export default function Home() {
@@ -13,64 +13,137 @@ export default function Home() {
     <div className="app-layout">
       {/* Sidebar */}
       <nav className="app-layout__sidebar">
-        <div className="app-layout__logo">M</div>
-        <button
-          onClick={() => setActiveTab("input")}
-          className={`app-layout__nav-button ${
-            activeTab === "input" ? "app-layout__nav-button--active" : ""
-          }`}
-        >
-          <MessageSquare size={24} />
-        </button>
-        <button
-          onClick={() => setActiveTab("insights")}
-          className={`app-layout__nav-button ${
-            activeTab === "insights" ? "app-layout__nav-button--active" : ""
-          }`}
-        >
-          <BarChart3 size={24} />
-        </button>
-        <button
-          onClick={() => setActiveTab("settings")}
-          className={`app-layout__nav-button ${
-            activeTab === "settings" ? "app-layout__nav-button--active" : ""
-          }`}
-        >
-          <Settings size={24} />
-        </button>
+        <div className="app-layout__logo">
+          M<span className="app-layout__logo-accent">i</span>mir
+        </div>
+
+        <div className="app-layout__nav">
+          <button
+            onClick={() => setActiveTab("input")}
+            className={`app-layout__nav-button ${
+              activeTab === "input" ? "app-layout__nav-button--active" : ""
+            }`}
+          >
+            <MessageSquare />
+            <span>Notes</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("insights")}
+            className={`app-layout__nav-button ${
+              activeTab === "insights" ? "app-layout__nav-button--active" : ""
+            }`}
+          >
+            <Lightbulb />
+            <span>Insights</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("settings")}
+            className={`app-layout__nav-button ${
+              activeTab === "settings" ? "app-layout__nav-button--active" : ""
+            }`}
+          >
+            <Settings />
+            <span>Settings</span>
+          </button>
+        </div>
       </nav>
 
       {/* Main content */}
       <div className="app-layout__main">
         {activeTab === "input" && (
-          <div className="app-layout__content">
-            <h1 className="app-layout__content-title">Input CRM Notes</h1>
-            <div className="crm-input">
-              <textarea
-                className="crm-input__textarea"
-                placeholder="Paste your Swedish CRM notes here..."
-              />
-              <button className="crm-input__button">Analyze Feedback</button>
+          <>
+            <header className="app-layout__header">
+              <h1 className="app-layout__header-title">CRM Notes Analysis</h1>
+              <p className="app-layout__header-subtitle">
+                Transform your customer feedback into actionable insights
+              </p>
+            </header>
+
+            <div className="app-layout__content">
+              <div className="app-layout__content-container">
+                <div className="app-layout__card">
+                  <h2 className="app-layout__card-title">
+                    Input Customer Notes
+                  </h2>
+                  <p className="app-layout__card-subtitle">
+                    Paste your Swedish CRM notes below for analysis
+                  </p>
+                  <textarea
+                    className="crm-input__textarea"
+                    placeholder="Paste your Swedish CRM notes here..."
+                    rows={6}
+                  />
+                  <button className="crm-input__button">
+                    Analyze Feedback
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
 
         {activeTab === "insights" && (
-          <div className="app-layout__content">
-            <h1 className="app-layout__content-title">Feedback Insights</h1>
-            <div className="app-layout__content-card">
-              <p>Insights dashboard coming soon...</p>
+          <>
+            <header className="app-layout__header">
+              <h1 className="app-layout__header-title">Feedback Insights</h1>
+              <p className="app-layout__header-subtitle">
+                Discover patterns and trends in your customer feedback
+              </p>
+            </header>
+
+            <div className="app-layout__content">
+              <div className="app-layout__content-container">
+                <div className="app-layout__content-grid">
+                  <div className="app-layout__card">
+                    <h2 className="app-layout__card-title">Key Themes</h2>
+                    <p className="app-layout__card-subtitle">
+                      Most discussed topics from your feedback
+                    </p>
+                  </div>
+
+                  <div className="app-layout__card">
+                    <h2 className="app-layout__card-title">
+                      Sentiment Analysis
+                    </h2>
+                    <p className="app-layout__card-subtitle">
+                      Overall customer satisfaction trends
+                    </p>
+                  </div>
+
+                  <div className="app-layout__card">
+                    <h2 className="app-layout__card-title">Action Items</h2>
+                    <p className="app-layout__card-subtitle">
+                      Suggested next steps based on feedback
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
 
         {activeTab === "settings" && (
-          <div className="app-layout__content">
-            <h1 className="app-layout__content-title">Settings</h1>
-            <div className="app-layout__content-card">
-              <p>Settings panel coming soon...</p>
+          <>
+            <header className="app-layout__header">
+              <h1 className="app-layout__header-title">Settings</h1>
+              <p className="app-layout__header-subtitle">
+                Customize your Mimir experience
+              </p>
+            </header>
+
+            <div className="app-layout__content">
+              <div className="app-layout__content-container">
+                <div className="app-layout__card">
+                  <h2 className="app-layout__card-title">Preferences</h2>
+                  <p className="app-layout__card-subtitle">
+                    Configure your analysis settings
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>
