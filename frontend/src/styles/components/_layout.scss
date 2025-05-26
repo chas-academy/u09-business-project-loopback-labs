@@ -1,0 +1,62 @@
+// Layout component styles
+.app-layout {
+  @include flex;
+  height: 100vh;
+
+  &__sidebar {
+    width: map-get($spacing, 16);
+    background-color: map-get($colors, gray, 900);
+    color: map-get($colors, white);
+    @include flex(column, flex-start, center);
+    padding: map-get($spacing, 4) 0;
+
+    > * + * {
+      margin-top: map-get($spacing, 8);
+    }
+  }
+
+  &__logo {
+    font-size: map-get($font, sizes, "2xl");
+    font-weight: map-get($font, weights, bold);
+  }
+
+  &__nav-button {
+    padding: map-get($spacing, 2);
+    border-radius: $border-radius;
+    transition: background-color $transition-duration;
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+
+    &--active {
+      background-color: map-get($colors, primary);
+    }
+
+    &:not(&--active):hover {
+      background-color: map-get($colors, gray, 800);
+    }
+  }
+
+  &__main {
+    flex: 1;
+    background-color: map-get($colors, gray, 50);
+  }
+
+  &__content {
+    padding: map-get($spacing, 6);
+
+    &-title {
+      font-size: map-get($font, sizes, "2xl");
+      font-weight: map-get($font, weights, bold);
+      margin-bottom: map-get($spacing, 4);
+    }
+
+    &-card {
+      background-color: map-get($colors, white);
+      padding: map-get($spacing, 6);
+      border-radius: $border-radius;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+// Input component styles
+.crm-input {
+  &__textarea {
+    width: 100%;
+    padding: map-get($spacing, 4);
+    border: 1px solid map-get($colors, gray, 200);
+    border-radius: $border-radius;
+    resize: none;
+    min-height: map-get($spacing, 48);
+    font-family: inherit;
+    font-size: map-get($font, sizes, base);
+    transition: border-color $transition-duration,
+      box-shadow $transition-duration;
+
+    &:focus {
+      outline: none;
+      border-color: transparent;
+      box-shadow: 0 0 0 2px rgba(map-get($colors, primary), 0.5);
+    }
+  }
+
+  &__button {
+    margin-top: map-get($spacing, 4);
+    padding: map-get($spacing, 2) map-get($spacing, 6);
+    background-color: map-get($colors, primary);
+    color: map-get($colors, white);
+    border: none;
+    border-radius: $border-radius;
+    font-size: map-get($font, sizes, base);
+    font-weight: map-get($font, weights, medium);
+    cursor: pointer;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: rgba(map-get($colors, primary), 0.9);
+    }
+
+    &:active {
+      background-color: rgba(map-get($colors, primary), 0.8);
+    }
+  }
+}

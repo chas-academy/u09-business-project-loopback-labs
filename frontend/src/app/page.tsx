@@ -1,95 +1,78 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import { BarChart3, MessageSquare, Settings } from "lucide-react";
+import "@/styles/main.scss";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activeTab, setActiveTab] = useState<"input" | "insights" | "settings">(
+    "input"
+  );
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  return (
+    <div className="app-layout">
+      {/* Sidebar */}
+      <nav className="app-layout__sidebar">
+        <div className="app-layout__logo">M</div>
+        <button
+          onClick={() => setActiveTab("input")}
+          className={`app-layout__nav-button ${
+            activeTab === "input" ? "app-layout__nav-button--active" : ""
+          }`}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <MessageSquare size={24} />
+        </button>
+        <button
+          onClick={() => setActiveTab("insights")}
+          className={`app-layout__nav-button ${
+            activeTab === "insights" ? "app-layout__nav-button--active" : ""
+          }`}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <BarChart3 size={24} />
+        </button>
+        <button
+          onClick={() => setActiveTab("settings")}
+          className={`app-layout__nav-button ${
+            activeTab === "settings" ? "app-layout__nav-button--active" : ""
+          }`}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <Settings size={24} />
+        </button>
+      </nav>
+
+      {/* Main content */}
+      <div className="app-layout__main">
+        {activeTab === "input" && (
+          <div className="app-layout__content">
+            <h1 className="app-layout__content-title">Input CRM Notes</h1>
+            <div className="crm-input">
+              <textarea
+                className="crm-input__textarea"
+                placeholder="Paste your Swedish CRM notes here..."
+              />
+              <button className="crm-input__button">Analyze Feedback</button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "insights" && (
+          <div className="app-layout__content">
+            <h1 className="app-layout__content-title">Feedback Insights</h1>
+            <div className="app-layout__content-card">
+              <p>Insights dashboard coming soon...</p>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "settings" && (
+          <div className="app-layout__content">
+            <h1 className="app-layout__content-title">Settings</h1>
+            <div className="app-layout__content-card">
+              <p>Settings panel coming soon...</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
