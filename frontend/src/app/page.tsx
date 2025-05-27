@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MessageSquare, Settings, Lightbulb } from "lucide-react";
 import Link from "next/link";
+import GeminiTest from "@/components/GeminiTest";
 import "@/styles/main.scss";
 
 export default function Home() {
@@ -131,12 +132,7 @@ export default function Home() {
             </header>
 
             <div className="app-layout__content">
-              <div className="app-layout__card">
-                <h2 className="app-layout__card-title">Preferences</h2>
-                <p className="app-layout__card-subtitle">
-                  Configure your analysis settings
-                </p>
-              </div>
+              <GeminiTest />
             </div>
           </>
         )}
