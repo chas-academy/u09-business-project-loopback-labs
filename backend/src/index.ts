@@ -8,15 +8,22 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// CORS configuration
+const corsOptions = {
+  origin: true, // Allow all origins in development
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
+  exposedHeaders: ["Content-Range", "X-Content-Range"],
+  maxAge: 600, // 10 minutes
+};
+
+// Apply CORS before other middleware
+app.use(cors(corsOptions));
 app.use(express.json());
+
+// Add OPTIONS handling for preflight requests
+app.options("*", cors(corsOptions));
 
 // Request logging middleware
 app.use((req, res, next) => {

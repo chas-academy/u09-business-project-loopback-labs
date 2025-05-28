@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageSquare, Settings, Lightbulb } from "lucide-react";
-import Link from "next/link";
-import GeminiTest from "@/components/GeminiTest";
+import Navigation from "@/components/Navigation";
 import "@/styles/main.scss";
 
 export default function Home() {
@@ -13,50 +11,7 @@ export default function Home() {
 
   return (
     <div className="app-layout">
-      {/* Top Navigation */}
-      <nav className="app-layout__navbar">
-        <div className="app-layout__navbar-content">
-          <div className="app-layout__logo-section">
-            <Link href="/" className="app-layout__logo">
-              M<span className="app-layout__logo-accent">i</span>mir
-            </Link>
-
-            <div className="app-layout__nav">
-              <button
-                onClick={() => setActiveTab("input")}
-                className={`app-layout__nav-button ${
-                  activeTab === "input" ? "app-layout__nav-button--active" : ""
-                }`}
-              >
-                <MessageSquare />
-                <span>Notes</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab("insights")}
-                className={`app-layout__nav-button ${
-                  activeTab === "insights"
-                    ? "app-layout__nav-button--active"
-                    : ""
-                }`}
-              >
-                <Lightbulb />
-                <span>Insights</span>
-              </button>
-            </div>
-          </div>
-
-          <button
-            onClick={() => setActiveTab("settings")}
-            className={`app-layout__nav-button ${
-              activeTab === "settings" ? "app-layout__nav-button--active" : ""
-            }`}
-          >
-            <Settings />
-            <span>Settings</span>
-          </button>
-        </div>
-      </nav>
+      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Main content */}
       <main className="app-layout__main">
@@ -132,7 +87,7 @@ export default function Home() {
             </header>
 
             <div className="app-layout__content">
-              <GeminiTest />
+              {/* Add settings content here */}
             </div>
           </>
         )}

@@ -36,15 +36,13 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const login = async (req: Request, res: Response): Promise<void> => {
+export const login = async (req: Request, res: Response) => {
   try {
-    console.log("Login attempt with body:", req.body);
     const { email, password } = req.body;
+    console.log("Login attempt with body:", { email, password });
 
     if (!email || !password) {
-      console.log("Missing email or password");
-      res.status(400).json({ error: "Email and password are required" });
-      return;
+      return res.status(400).json({ error: "Email and password are required" });
     }
 
     console.log("Attempting Supabase login...");
@@ -55,28 +53,36 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     if (error) {
       console.error("Supabase login error:", error);
-      res.status(401).json({ error: error.message });
-      return;
+      return res.status(401).json({ error: error.message });
     }
 
-    // Create a JWT token
-    const token = jwt.sign(
-      { userId: data.user.id, email: data.user.email },
-      process.env.JWT_SECRET || "your-fallback-secret",
-      { expiresIn: "24h" }
-    );
+    if (!data.user) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
 
     console.log("Login successful:", {
       userId: data.user.id,
       email: data.user.email,
     });
-    res.status(200).json({
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: data.user.id, email: data.user.email },
+      process.env.JWT_SECRET || "your-secret-key",
+      { expiresIn: "1d" }
+    );
+
+    // Return the response in the expected format
+    return res.status(200).json({
       message: "Login successful",
-      user: data.user,
+      user: {
+        id: data.user.id,
+        email: data.user.email,
+      },
       token,
     });
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Server error during login:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
