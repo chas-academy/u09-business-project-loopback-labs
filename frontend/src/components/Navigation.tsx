@@ -10,6 +10,9 @@ import {
   LogIn,
   LogOut,
   UserPlus,
+  Menu,
+  X,
+  ChevronDown,
 } from "lucide-react";
 import { isAuthenticated, signOut } from "@/utils/auth";
 
@@ -25,6 +28,8 @@ export default function Navigation({
   const router = useRouter();
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
   const isDashboard = pathname?.startsWith("/dashboard");
 
   useEffect(() => {
@@ -36,46 +41,151 @@ export default function Navigation({
     router.push("/");
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   // Show different navigation items based on the current page
   if (!isDashboard) {
     return (
       <nav className="landing-nav">
         <div className="landing-nav__container">
-          <Link href="/" className="app-layout__logo">
-            M<span className="app-layout__logo-accent">i</span>mir
-          </Link>
+          <div className="landing-nav__left">
+            <Link href="/" className="landing-nav__logo">
+              M<span className="landing-nav__logo-accent">i</span>mir
+            </Link>
 
-          <div className="landing-nav__actions">
+            <div className="landing-nav__links">
+              <div
+                className="landing-nav__dropdown"
+                onMouseEnter={() => setIsProductDropdownOpen(true)}
+                onMouseLeave={() => setIsProductDropdownOpen(false)}
+              >
+                <button className="landing-nav__dropdown-trigger">
+                  Product
+                  <ChevronDown size={16} />
+                </button>
+                {isProductDropdownOpen && (
+                  <div className="landing-nav__dropdown-content">
+                    <div className="landing-nav__dropdown-section">
+                      <h3 className="landing-nav__dropdown-title">Features</h3>
+                      <Link
+                        href="#features"
+                        className="landing-nav__dropdown-link"
+                      >
+                        <MessageSquare size={16} />
+                        <div>
+                          <span>AI Analysis</span>
+                          <span>Process customer feedback with AI</span>
+                        </div>
+                      </Link>
+                      <Link
+                        href="#features"
+                        className="landing-nav__dropdown-link"
+                      >
+                        <Lightbulb size={16} />
+                        <div>
+                          <span>Smart Insights</span>
+                          <span>Get actionable recommendations</span>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <Link href="#pricing" className="landing-nav__link">
+                Pricing
+              </Link>
+              <Link href="#about" className="landing-nav__link">
+                About
+              </Link>
+            </div>
+          </div>
+
+          <div className="landing-nav__right">
             {isLoggedIn ? (
               <>
                 <Link
                   href="/dashboard"
-                  className="landing-nav__link landing-nav__link--primary"
+                  className="landing-nav__button landing-nav__button--primary"
                 >
                   Dashboard
                 </Link>
-                <button onClick={handleSignOut} className="landing-nav__button">
+                <button
+                  onClick={handleSignOut}
+                  className="landing-nav__button landing-nav__button--secondary"
+                >
                   <LogOut size={20} />
                   <span>Sign out</span>
                 </button>
               </>
             ) : (
               <>
-                <Link href="/login" className="landing-nav__link">
+                <Link
+                  href="/login"
+                  className="landing-nav__button landing-nav__button--secondary"
+                >
                   <LogIn size={20} />
                   <span>Sign in</span>
                 </Link>
                 <Link
                   href="/register"
-                  className="landing-nav__link landing-nav__link--primary"
+                  className="landing-nav__button landing-nav__button--primary"
                 >
                   <UserPlus size={20} />
                   <span>Get Started</span>
                 </Link>
               </>
             )}
+
+            <button
+              className="landing-nav__mobile-trigger"
+              onClick={toggleMobileMenu}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="landing-nav__mobile-menu">
+            <Link href="#features" className="landing-nav__mobile-link">
+              Product
+            </Link>
+            <Link href="#pricing" className="landing-nav__mobile-link">
+              Pricing
+            </Link>
+            <Link href="#about" className="landing-nav__mobile-link">
+              About
+            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link href="/dashboard" className="landing-nav__mobile-link">
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="landing-nav__mobile-link landing-nav__mobile-link--button"
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="landing-nav__mobile-link">
+                  Sign in
+                </Link>
+                <Link
+                  href="/register"
+                  className="landing-nav__mobile-link landing-nav__mobile-link--cta"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </nav>
     );
   }
