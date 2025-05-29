@@ -15,7 +15,7 @@ export default function Dashboard() {
   // Protect the route
   useEffect(() => {
     if (!isAuthenticated()) {
-      router.push("/auth/login");
+      router.push("/login");
     }
   }, [router]);
 

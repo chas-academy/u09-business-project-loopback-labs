@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/utils/auth";
 import { useEffect } from "react";
+import { MessageSquare, Lightbulb, TrendingUp, Users } from "lucide-react";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -16,77 +17,103 @@ export default function LandingPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen">
+    <div className="landing">
       {/* Hero Section */}
-      <section className="py-20 px-6 text-center">
-        <h1 className="text-5xl font-bold mb-6">
-          Förvandla Kundernas Feedback till Värdefulla Insikter
-        </h1>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
-          Mimir analyserar dina CRM-anteckningar med AI för att upptäcka
-          mönster, trender och förbättringsmöjligheter i din kundkommunikation.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/auth/register"
-            className="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90"
-          >
-            Kom igång gratis
-          </Link>
-          <Link
-            href="/auth/login"
-            className="bg-secondary px-6 py-3 rounded-lg font-medium hover:bg-secondary/90"
-          >
-            Logga in
-          </Link>
+      <section className="landing__section landing__section--hero">
+        <div className="landing__hero">
+          <h1 className="landing__hero-title">
+            Transform Customer Feedback into Valuable Insights
+          </h1>
+          <p className="landing__hero-subtitle">
+            Mimir uses advanced AI to analyze your customer interactions,
+            helping you uncover valuable patterns and insights that drive
+            business growth.
+          </p>
+          <div className="landing__actions">
+            <Link
+              href="/register"
+              className="landing__button landing__button--primary"
+            >
+              Start Free Trial
+            </Link>
+            <Link
+              href="/login"
+              className="landing__button landing__button--secondary"
+            >
+              Sign In
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Kraftfulla funktioner
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      <section className="landing__section landing__section--features">
+        <div className="landing__container">
+          <h2 className="landing__section-title">Why Choose Mimir?</h2>
+          <div className="landing__grid">
             <FeatureCard
-              title="AI-Driven Analys"
-              description="Automatisk analys av svensk text med hjälp av Google Gemini AI"
+              icon={<MessageSquare className="landing__card-icon" />}
+              title="AI-Powered Analysis"
+              description="Advanced natural language processing to extract meaningful insights from your customer conversations"
             />
             <FeatureCard
-              title="Temaidentifiering"
-              description="Upptäck återkommande teman och mönster i kundfeedback"
+              icon={<Lightbulb className="landing__card-icon" />}
+              title="Smart Recommendations"
+              description="Get actionable suggestions to improve customer satisfaction and business outcomes"
             />
             <FeatureCard
-              title="Handlingsbara Insikter"
-              description="Få konkreta förslag på förbättringsområden"
+              icon={<TrendingUp className="landing__card-icon" />}
+              title="Trend Detection"
+              description="Identify emerging patterns and trends in customer feedback before they become obvious"
+            />
+            <FeatureCard
+              icon={<Users className="landing__card-icon" />}
+              title="Team Collaboration"
+              description="Share insights across your team and align everyone with customer needs"
             />
           </div>
         </div>
       </section>
 
       {/* How it Works Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Hur det fungerar
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      <section className="landing__section landing__section--steps">
+        <div className="landing__container">
+          <h2 className="landing__section-title">How It Works</h2>
+          <div className="landing__steps-grid">
             <StepCard
               number="1"
-              title="Kopiera & Klistra in"
-              description="Klistra in dina CRM-anteckningar direkt i systemet"
+              title="Input Your Data"
+              description="Simply paste your customer interaction notes or connect your CRM"
             />
             <StepCard
               number="2"
-              title="AI Analys"
-              description="Vår AI analyserar texten och identifierar nyckelinsikter"
+              title="AI Analysis"
+              description="Our advanced AI processes and analyzes your data in real-time"
             />
             <StepCard
               number="3"
-              title="Få Insikter"
-              description="Se trender, sentiment och förbättringsförslag"
+              title="Get Insights"
+              description="Access detailed reports, trends, and actionable recommendations"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="landing__section landing__section--cta">
+        <div className="landing__container">
+          <h2 className="landing__cta-title">Ready to Get Started?</h2>
+          <p className="landing__cta-description">
+            Join companies that use Mimir to understand and improve their
+            customer experience.
+          </p>
+          <div className="landing__cta-actions">
+            <Link
+              href="/register"
+              className="landing__button landing__button--primary"
+            >
+              Start Free Trial
+            </Link>
           </div>
         </div>
       </section>
@@ -95,16 +122,19 @@ export default function LandingPage() {
 }
 
 function FeatureCard({
+  icon,
   title,
   description,
 }: {
+  icon: React.ReactNode;
   title: string;
   description: string;
 }) {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-sm">
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+    <div className="landing__card">
+      <div className="landing__card-icon-wrapper">{icon}</div>
+      <h3 className="landing__card-title">{title}</h3>
+      <p className="landing__card-description">{description}</p>
     </div>
   );
 }
@@ -119,12 +149,10 @@ function StepCard({
   description: string;
 }) {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-sm">
-      <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center mb-4">
-        {number}
-      </div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+    <div className="landing__step">
+      <div className="landing__step-number">{number}</div>
+      <h3 className="landing__step-title">{title}</h3>
+      <p className="landing__step-description">{description}</p>
     </div>
   );
 }

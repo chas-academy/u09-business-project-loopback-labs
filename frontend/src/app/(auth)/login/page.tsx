@@ -30,12 +30,12 @@ function LoginContent() {
       if (response.token) {
         console.log("Setting auth token...");
         setAuthToken(response.token);
-        setMessage("Login successful! Redirecting...");
+        setMessage("Login successful! Redirecting to dashboard...");
 
         // Small delay to show the success message
         setTimeout(() => {
-          console.log("Redirecting to home...");
-          router.push("/");
+          console.log("Redirecting to dashboard...");
+          router.push("/dashboard");
         }, 1500);
       } else {
         console.warn("No token in response:", response);
