@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/utils/auth";
 import { useEffect } from "react";
 import { MessageSquare, Lightbulb, TrendingUp, Users } from "lucide-react";
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/layout/Navigation";
 
 export default function LandingPage() {
   const router = useRouter();

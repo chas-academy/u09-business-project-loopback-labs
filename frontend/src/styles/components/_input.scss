@@ -2,41 +2,41 @@
 .crm-input {
   &__textarea {
     width: 100%;
-    padding: map-get($spacing, 4);
-    border: 1px solid map-get($colors, gray, 200);
-    border-radius: $border-radius;
+    padding: map-get($mimir-spacing, 4);
+    border: 1px solid map-get($mimir-colors, neutral, 200);
+    border-radius: map-get($mimir-radius, md);
     resize: none;
-    min-height: map-get($spacing, 48);
+    min-height: 12rem; // 48 * 0.25rem = 12rem
     font-family: inherit;
-    font-size: map-get($font, sizes, base);
-    transition: border-color $transition-duration,
-      box-shadow $transition-duration;
+    font-size: map-get($mimir-typography, sizes, base);
+    transition: border-color map-get($mimir-transitions, base),
+      box-shadow map-get($mimir-transitions, base);
 
     &:focus {
       outline: none;
       border-color: transparent;
-      box-shadow: 0 0 0 2px rgba(map-get($colors, primary), 0.5);
+      box-shadow: 0 0 0 2px rgba(map-get($mimir-colors, teal), 0.5);
     }
   }
 
   &__button {
-    margin-top: map-get($spacing, 4);
-    padding: map-get($spacing, 2) map-get($spacing, 6);
-    background-color: map-get($colors, primary);
-    color: map-get($colors, white);
+    margin-top: map-get($mimir-spacing, 4);
+    padding: map-get($mimir-spacing, 2) map-get($mimir-spacing, 6);
+    background-color: map-get($mimir-colors, teal);
+    color: map-get($mimir-colors, white);
     border: none;
-    border-radius: $border-radius;
-    font-size: map-get($font, sizes, base);
-    font-weight: map-get($font, weights, medium);
+    border-radius: map-get($mimir-radius, md);
+    font-size: map-get($mimir-typography, sizes, base);
+    font-weight: map-get($mimir-typography, weights, medium);
     cursor: pointer;
-    transition: background-color $transition-duration;
+    transition: background-color map-get($mimir-transitions, base);
 
     &:hover {
-      background-color: rgba(map-get($colors, primary), 0.9);
+      background-color: darken(map-get($mimir-colors, teal), 10%);
     }
 
     &:active {
-      background-color: rgba(map-get($colors, primary), 0.8);
+      background-color: darken(map-get($mimir-colors, teal), 15%);
     }
   }
 }
