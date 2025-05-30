@@ -3,40 +3,51 @@
   &__textarea {
     width: 100%;
     padding: map-get($mimir-spacing, 4);
-    border: 1px solid map-get($mimir-colors, neutral, 200);
+    border: 1px solid map-get($mimir-colors, neutral, 300);
     border-radius: map-get($mimir-radius, md);
+    background-color: map-get($mimir-colors, white);
     resize: none;
-    min-height: 12rem; // 48 * 0.25rem = 12rem
+    min-height: 12rem;
     font-family: inherit;
     font-size: map-get($mimir-typography, sizes, base);
     transition: border-color map-get($mimir-transitions, base),
       box-shadow map-get($mimir-transitions, base);
+    padding: map-get($mimir-spacing, 4);
 
     &:focus {
       outline: none;
-      border-color: transparent;
-      box-shadow: 0 0 0 2px rgba(map-get($mimir-colors, teal), 0.5);
+      border-color: map-get($mimir-colors, teal);
+      box-shadow: map-get($mimir-shadows, sm);
     }
   }
 
   &__button {
     margin-top: map-get($mimir-spacing, 4);
     padding: map-get($mimir-spacing, 2) map-get($mimir-spacing, 6);
-    background-color: map-get($mimir-colors, teal);
-    color: map-get($mimir-colors, white);
-    border: none;
+    background-color: map-get($mimir-colors, white);
+    color: map-get($mimir-colors, fjord);
+    border: 1px solid map-get($mimir-colors, neutral, 300);
     border-radius: map-get($mimir-radius, md);
     font-size: map-get($mimir-typography, sizes, base);
     font-weight: map-get($mimir-typography, weights, medium);
     cursor: pointer;
-    transition: background-color map-get($mimir-transitions, base);
+    transition: all map-get($mimir-transitions, base);
+    padding: map-get($mimir-spacing, 3) map-get($mimir-spacing, 6);
 
     &:hover {
-      background-color: darken(map-get($mimir-colors, teal), 10%);
+      background-color: map-get($mimir-colors, offwhite);
+      border-color: map-get($mimir-colors, teal);
     }
 
     &:active {
-      background-color: darken(map-get($mimir-colors, teal), 15%);
+      background-color: map-get($mimir-colors, offwhite);
+      border-color: map-get($mimir-colors, teal);
+      transform: translateY(1px);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: map-get($mimir-shadows, sm);
     }
   }
 }
