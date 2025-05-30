@@ -160,4 +160,81 @@
   &__special {
     color: map-get($mimir-colors, rose);
   }
+
+  &__error {
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    color: #991b1b;
+    padding: map-get($mimir-spacing, 3);
+    border-radius: map-get($mimir-radius, md);
+    margin-bottom: map-get($mimir-spacing, 4);
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: map-get($mimir-spacing, 4) 0 0;
+
+    &-item {
+      padding: map-get($mimir-spacing, 3);
+      border-bottom: 1px solid map-get($mimir-colors, neutral, 200);
+      color: map-get($mimir-colors, stone);
+      font-size: map-get($mimir-typography, sizes, sm);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__sentiment {
+    margin-top: map-get($mimir-spacing, 4);
+    padding: map-get($mimir-spacing, 3);
+    border-radius: map-get($mimir-radius, md);
+    text-align: center;
+    font-weight: map-get($mimir-typography, weights, medium);
+    font-size: map-get($mimir-typography, sizes, lg);
+
+    &--positive {
+      background-color: #ecfdf5;
+      color: #047857;
+    }
+
+    &--neutral {
+      background-color: #f3f4f6;
+      color: #4b5563;
+    }
+
+    &--negative {
+      background-color: #fef2f2;
+      color: #b91c1c;
+    }
+  }
+
+  &__summary {
+    margin-top: map-get($mimir-spacing, 4);
+    color: map-get($mimir-colors, stone);
+    font-size: map-get($mimir-typography, sizes, sm);
+    line-height: 1.6;
+  }
+
+  &__card {
+    background: white;
+    border-radius: map-get($mimir-radius, lg);
+    padding: map-get($mimir-spacing, 6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    &-title {
+      font-size: map-get($mimir-typography, sizes, xl);
+      font-weight: map-get($mimir-typography, weights, semibold);
+      color: map-get($mimir-colors, fjord);
+      margin-bottom: map-get($mimir-spacing, 2);
+    }
+
+    &-subtitle {
+      font-size: map-get($mimir-typography, sizes, sm);
+      color: map-get($mimir-colors, stone);
+      margin-bottom: map-get($mimir-spacing, 4);
+    }
+  }
 }
