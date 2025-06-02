@@ -15,6 +15,9 @@ const itemSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  recipeId: String,
+  instructions: String,
+  ingredients: [String],
   savedBy: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
