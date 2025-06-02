@@ -6,6 +6,7 @@ import {
   searchRecipes,
   getRecipeDetails
 } from '../api/client';
+import './Items.css';
 
 function Items() {
   const [items, setItems] = useState([]);
