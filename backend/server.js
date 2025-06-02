@@ -14,6 +14,10 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+// Routes
+const itemRoutes = require('./routes/itemRoutes');
+app.use('/api/items', itemRoutes);
+
 // Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Mimir API' });
