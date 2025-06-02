@@ -18,6 +18,9 @@ function Navbar() {
         <li>
           <Link to="/test">Test API</Link>
         </li>
+        <li>
+          <Link to="/test-backend">Test Backend</Link>
+        </li>
       </ul>
     </nav>
   );

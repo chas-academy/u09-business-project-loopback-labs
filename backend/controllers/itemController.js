@@ -12,19 +12,12 @@ exports.getItems = async (req, res) => {
 
 // Save a new item
 exports.saveItem = async (req, res) => {
-  const { externalId, title, description, imageUrl, source } = req.body;
-
   try {
-    const item = new Item({
-      externalId,
-      title,
-      description,
-      imageUrl,
-      source
-    });
+    const item = new Item(req.body);
     await item.save();
     res.status(201).json(item);
   } catch (error) {
+    console.error('Error saving item:', error);
     res.status(400).json({ message: error.message });
   }
 };
