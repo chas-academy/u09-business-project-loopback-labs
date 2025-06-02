@@ -1,28 +1,49 @@
 import { useState, useEffect } from 'react';
-import { fetchItems, saveItem, deleteItem } from '../api/client';
+import { 
+  fetchItems, 
+  saveItem, 
+  deleteItem,
+  searchRecipes,
+  getRecipeDetails
+} from '../api/client';
 
 function Items() {
   const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState({
-    title: '',
-    description: '',
-    imageUrl: '',
-    source: 'test'
-  });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     fetchItems().then(setItems);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      await saveItem(newItem);
+      const results = await searchRecipes(searchQuery);
+      setSearchResults(results);
+    } catch (error) {
+      console.error('Error searching recipes:', error);
+    }
+  };
+
+  const handleSaveRecipe = async (recipe) => {
+    try {
+      const details = await getRecipeDetails(recipe.id);
+      await saveItem({
+        title: details.title,
+        description: details.summary,
+        imageUrl: details.image,
+        source: 'spoonacular',
+        recipeId: details.id,
+        instructions: details.instructions,
+        ingredients: details.extendedIngredients
+      });
       const updatedItems = await fetchItems();
       setItems(updatedItems);
-      setNewItem({ title: '', description: '', imageUrl: '', source: 'test' });
+      setSearchResults([]);
+      setSearchQuery('');
     } catch (error) {
-      console.error('Error saving item:', error);
+      console.error('Error saving recipe:', error);
     }
   };
 
@@ -38,36 +59,40 @@ function Items() {
 
   return (
     <div className="items-page">
-      <h2>Items</h2>
+      <h2>My Recipes</h2>
       
-      <form onSubmit={handleSubmit} className="item-form">
-        <input
-          type="text"
-          placeholder="Title"
-          value={newItem.title}
-          onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={newItem.description}
-          onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={newItem.imageUrl}
-          onChange={(e) => setNewItem({ ...newItem, imageUrl: e.target.value })}
-        />
-        <button type="submit">Add Item</button>
-      </form>
+      <div className="search-section">
+        <form onSubmit={handleSearch} className="search-form">
+          <input
+            type="text"
+            placeholder="Search for recipes..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
 
-      <div className="items-list">
+        {searchResults.length > 0 && (
+          <div className="search-results">
+            <h3>Search Results</h3>
+            {searchResults.map((recipe) => (
+              <div key={recipe.id} className="recipe-card">
+                <img src={recipe.image} alt={recipe.title} />
+                <h4>{recipe.title}</h4>
+                <button onClick={() => handleSaveRecipe(recipe)}>Save Recipe</button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="saved-recipes">
+        <h3>My Saved Recipes</h3>
         {items.map((item) => (
-          <div key={item._id} className="item-card">
-            <h3>{item.title}</h3>
+          <div key={item._id} className="recipe-card">
+            <img src={item.imageUrl} alt={item.title} />
+            <h4>{item.title}</h4>
             <p>{item.description}</p>
-            {item.imageUrl && <img src={item.imageUrl} alt={item.title} />}
             <button onClick={() => handleDelete(item._id)}>Delete</button>
           </div>
         ))}
