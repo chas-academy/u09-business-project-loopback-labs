@@ -6,6 +6,7 @@ import TestAPI from './pages/TestAPI';
 import TestBackend from './pages/TestBackend';
 import Login from './pages/Login';
 import GithubCallback from './pages/GithubCallback';
+import Profile from './pages/Profile';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -28,6 +29,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/profile" element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+              />
               <Route
                 path="/items"
                 element={

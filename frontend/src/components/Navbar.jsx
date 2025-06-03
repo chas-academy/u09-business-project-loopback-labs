@@ -22,6 +22,9 @@ function Navbar() {
       <div className="navbar-links">
         {isLoggedIn ? (
           <>
+            <Link to="/profile" className="nav-link">
+              Profile
+            </Link>
             <Link to="/items" className="nav-link">
               Items
             </Link>
