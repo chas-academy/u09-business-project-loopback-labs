@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL || '';
 
 // Use RENDER_API_URL in production if available
