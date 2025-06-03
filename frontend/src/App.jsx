@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Items from './pages/Items';
-import TestAPI from './pages/TestAPI';
-import TestBackend from './pages/TestBackend';
 import Login from './pages/Login';
 import GithubCallback from './pages/GithubCallback';
 import Profile from './pages/Profile';
@@ -40,22 +38,6 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Items />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/test-api"
-                element={
-                  <PrivateRoute>
-                    <TestAPI />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/test-backend"
-                element={
-                  <PrivateRoute>
-                    <TestBackend />
                   </PrivateRoute>
                 }
               />
