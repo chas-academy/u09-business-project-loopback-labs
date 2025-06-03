@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Items from './pages/Items';
 import TestAPI from './pages/TestAPI';
 import TestBackend from './pages/TestBackend';
+import GithubCallback from './pages/GithubCallback';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/items" element={<Items />} />
             <Route path="/test-api" element={<TestAPI />} />
             <Route path="/test-backend" element={<TestBackend />} />
+            <Route path="/auth/github/callback" element={<GithubCallback />} />
           </Routes>
         </div>
       </div>
