@@ -8,6 +8,19 @@ import {
 } from "../api/client";
 import "./Recipes.css";
 
+// Function to remove HTML tags and decode HTML entities
+const sanitizeHtml = (html) => {
+  if (!html) return "";
+
+  // First decode HTML entities
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  const decodedHtml = txt.value;
+
+  // Then remove HTML tags
+  return decodedHtml.replace(/<[^>]*>/g, "");
+};
+
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -141,7 +154,7 @@ function Recipes() {
                   />
                   <h4>{recipe.title}</h4>
                   <p className="recipe-summary">
-                    {recipe.summary || "No summary available"}
+                    {sanitizeHtml(recipe.summary)}
                   </p>
                   <button
                     onClick={() => handleSaveRecipe(recipe)}
@@ -171,7 +184,9 @@ function Recipes() {
                   className="recipe-image"
                 />
                 <h4>{recipe.title}</h4>
-                <p className="recipe-description">{recipe.description}</p>
+                <p className="recipe-description">
+                  {sanitizeHtml(recipe.description)}
+                </p>
                 <div className="recipe-details">
                   <p>Source: {recipe.source}</p>
                   <p>
