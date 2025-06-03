@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema(
   {
@@ -22,13 +22,13 @@ const recipeSchema = new mongoose.Schema(
     savedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-module.exports = mongoose.model("Recipe", recipeSchema);
+module.exports = mongoose.model('Recipe', recipeSchema);
