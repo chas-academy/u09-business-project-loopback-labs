@@ -25,8 +25,8 @@ function Navbar() {
             <Link to="/profile" className="nav-link">
               Profile
             </Link>
-            <Link to="/items" className="nav-link">
-              Items
+            <Link to="/recipes" className="nav-link">
+              Recipes
             </Link>
             <button onClick={handleLogout} className="logout-btn">
               Logout

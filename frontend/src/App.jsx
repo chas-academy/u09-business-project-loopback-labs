@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Items from './pages/Items';
+import Recipes from './pages/Recipes';
 import Login from './pages/Login';
 import GithubCallback from './pages/GithubCallback';
 import Profile from './pages/Profile';
@@ -34,10 +34,10 @@ function App() {
               }
               />
               <Route
-                path="/items"
+                path="/recipes"
                 element={
                   <PrivateRoute>
-                    <Items />
+                    <Recipes />
                   </PrivateRoute>
                 }
               />
