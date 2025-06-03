@@ -11,7 +11,7 @@ const SPOONACULAR_BASE_URL = 'https://api.spoonacular.com';
 // Backend API
 export const fetchItems = async () => {
   try {
-    const response = await axios.get(`${BASE_API_URL}/items`);
+    const response = await axios.get(`${BASE_API_URL}/api/items`);
     return response.data;
   } catch (error) {
     console.error('Error fetching items:', error);
@@ -21,7 +21,7 @@ export const fetchItems = async () => {
 
 export const saveItem = async (item) => {
   try {
-    const response = await axios.post(`${BASE_API_URL}/items`, item);
+    const response = await axios.post(`${BASE_API_URL}/api/items`, item);
     return response.data;
   } catch (error) {
     console.error('Error saving item:', error);
@@ -31,7 +31,7 @@ export const saveItem = async (item) => {
 
 export const deleteItem = async (id) => {
   try {
-    const response = await axios.delete(`${BASE_API_URL}/items/${id}`);
+    const response = await axios.delete(`${BASE_API_URL}/api/items/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error deleting item:', error);
