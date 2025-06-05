@@ -2,7 +2,7 @@
 
 # Mimir App
 
-En fullstack webapplikation som använder ett externt API för att hämta och visa data. Projektet bygger på React för frontend och Node.js/Express med MongoDB för backend.
+En webapplikation för att hitta och hantera recept. Projektet bygger på React för frontend och Node.js/Express för backend.
 
 ## UX/UI Design
 
@@ -10,28 +10,39 @@ En fullstack webapplikation som använder ett externt API för att hämta och vi
 
 ## Problem och Syfte
 
-Denna applikation löser problemet att användare vill ha en personlig upplevelse av API-data genom att tillåta användare att:
+Många människor har svårt för att:
+- Hitta nya recept som passar deras smak och behov
+- Hålla koll på favoritrecept
+- Organisera recept på ett användarvänligt sätt
+- Hitta recept snabbt när de behöver dem
 
-- Logga in via OAuth
-- Söka och visa data från ett externt API
-- Spara och hantera personliga listor/data
+Mimir App löser detta genom att:
+- Tillåta användare att söka genom tusentals recept
+- Göra det möjligt att spara favoritrecept
+- Visa detaljerad information om varje recept
+- Ge en användarvänlig upplevelse för att hitta och organisera recept
 
 ## Tekniskt
 
 ### Frontend
 
 - React
-- OAuth-autentisering
-- API-integration
+- OAuth-autentisering med GitHub
+- Integration med Spoonacular API
 - Responsive design
-- Mobile-first approach
+- Modern och intuitiv användargränssnitt
 
 ### Backend
 
 - Node.js/Express
-- MongoDB
-- CRUD-funktionalitet
 - RESTful API
+- Autentisering och användarhantering
+- Recepthantering och lagring
+
+## Deployment
+
+Frontend: https://mimir1.netlify.app/
+Backend: https://u09-business-project-loopback-labs.onrender.com
 
 ## Installation
 
@@ -92,7 +103,6 @@ mimir-app/
 
 Backend:
 
-- `MONGO_URI` - MongoDB connection string
 - `PORT` - Server port (default: 5001)
 - `GITHUB_CLIENT_ID` - GitHub OAuth client ID
 - `GITHUB_CLIENT_SECRET` - GitHub OAuth client secret
@@ -104,29 +114,23 @@ Frontend:
 
 ### API Endpoints
 
-- `GET /api/recipes` - Get all recipes
-- `GET /api/recipes/:id` - Get recipe by ID
-- `POST /api/recipes` - Create new recipe
-- `PUT /api/recipes/:id` - Update recipe
-- `DELETE /api/recipes/:id` - Delete recipe
+- `GET /api/recipes` - Hämta alla sparade recept
+- `GET /api/recipes/:id` - Hämta detaljer för ett recept
+- `POST /api/recipes` - Spara ett nytt recept
+- `DELETE /api/recipes/:id` - Ta bort ett recept
 
 ### OAuth Flow
 
-1. User clicks login button
-2. Redirected to GitHub OAuth page
-3. After authentication, redirected back to app
-4. User is logged in with access token
-5. Access token used for API requests
+1. Användare klickar på inloggningsknappen
+2. Omdirigeras till GitHub OAuth-sidan
+3. Efter autentisering omdirigeras användaren tillbaka till appen
+4. Användaren är inloggad och kan använda appen
 
 ### Error Handling
 
-- 401 Unauthorized - Invalid or expired token
-- 404 Not Found - Resource not found
-- 500 Internal Server Error - Server error
-
-### Deployment
-
-The application is deployed using Netlify for frontend and Heroku for backend.
+- 401 Unauthorized - Ogiltigt eller utgått token
+- 404 Not Found - Resurs hittades inte
+- 500 Internal Server Error - Serverfel
 
 ### Testing
 
