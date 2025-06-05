@@ -5,9 +5,11 @@ function Layout() {
   return (
     <div className="app">
       <Navbar />
-      <main className="main-content">
-        <Outlet />
-      </main>
+      <div className="page-content">
+        <main className="main-content">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

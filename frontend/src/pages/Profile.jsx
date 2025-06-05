@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import './Profile.css';
 
 function Profile() {
-  const { isLoggedIn } = useAuth();
+  useAuth();
 
   return (
     <div className="profile-container">

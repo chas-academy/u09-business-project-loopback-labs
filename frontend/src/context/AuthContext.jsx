@@ -8,7 +8,8 @@ export function AuthProvider({ children }) {
     return !!token;
   });
 
-  const [user, setUser] = useState(null);
+  // eslint-disable-next-line no-empty-pattern
+  const [] = useState(null);
 
   const login = (code) => {
     localStorage.setItem('githubAuthCode', code);
@@ -39,6 +40,7 @@ export function AuthProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

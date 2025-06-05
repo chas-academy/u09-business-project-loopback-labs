@@ -1,8 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
