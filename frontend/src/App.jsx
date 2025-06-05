@@ -5,6 +5,7 @@ import Recipes from './pages/Recipes';
 import Login from './pages/Login';
 import GithubCallback from './pages/GithubCallback';
 import Profile from './pages/Profile';
+import RecipeDetail from './pages/RecipeDetail';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -38,6 +39,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Recipes />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/recipes/:id"
+                element={
+                  <PrivateRoute>
+                    <RecipeDetail />
                   </PrivateRoute>
                 }
               />

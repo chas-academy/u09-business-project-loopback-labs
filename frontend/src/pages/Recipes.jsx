@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   fetchRecipes,
   saveRecipe,
@@ -8,18 +9,7 @@ import {
 } from "../api/client";
 import "./Recipes.css";
 
-// Function to remove HTML tags and decode HTML entities
-const sanitizeHtml = (html) => {
-  if (!html) return "";
 
-  // First decode HTML entities
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  const decodedHtml = txt.value;
-
-  // Then remove HTML tags
-  return decodedHtml.replace(/<[^>]*>/g, "");
-};
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -147,15 +137,16 @@ function Recipes() {
             <div className="recipe-grid">
               {searchResults.map((recipe) => (
                 <div key={recipe.id} className="recipe-card">
-                  <img
-                    src={recipe.image}
-                    alt={recipe.title}
-                    className="recipe-image"
-                  />
-                  <h4>{recipe.title}</h4>
-                  <p className="recipe-summary">
-                    {sanitizeHtml(recipe.summary)}
-                  </p>
+                  <Link to={`/recipes/${recipe.id}`} className="recipe-link">
+                    <div className="recipe-card-content">
+                      <img
+                        src={recipe.image}
+                        alt={recipe.title}
+                        className="recipe-image"
+                      />
+                      <h4>{recipe.title}</h4>
+                    </div>
+                  </Link>
                   <button
                     onClick={() => handleSaveRecipe(recipe)}
                     disabled={loading}
@@ -178,23 +169,16 @@ function Recipes() {
           <div className="recipe-grid">
             {recipes.map((recipe) => (
               <div key={recipe._id} className="recipe-card">
-                <img
-                  src={recipe.imageUrl}
-                  alt={recipe.title}
-                  className="recipe-image"
-                />
-                <h4>{recipe.title}</h4>
-                <p className="recipe-description">
-                  {sanitizeHtml(recipe.description)}
-                </p>
-                <div className="recipe-details">
-                  <p>Source: {recipe.source}</p>
-                  <p>
-                    Ingredients:{" "}
-                    {recipe.ingredients?.join(", ") ||
-                      "No ingredients available"}
-                  </p>
-                </div>
+                <Link to={`/recipes/${recipe.recipeId}`} className="recipe-link">
+                  <div className="recipe-card-content">
+                    <img
+                      src={recipe.imageUrl}
+                      alt={recipe.title}
+                      className="recipe-image"
+                    />
+                    <h4>{recipe.title}</h4>
+                  </div>
+                </Link>
                 <button
                   onClick={() => handleDelete(recipe._id)}
                   disabled={loading}
