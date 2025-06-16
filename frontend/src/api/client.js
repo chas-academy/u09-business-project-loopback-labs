@@ -5,7 +5,25 @@ const RENDER_API_URL = import.meta.env.VITE_RENDER_API_URL || "";
 
 // Use RENDER_API_URL in production if available
 const BASE_API_URL = RENDER_API_URL ? RENDER_API_URL : API_URL;
-const SPOONACULAR_API_KEY = import.meta.env.VITE_SPOONACULAR_API_KEY;
+
+// Override: ensure we have a real Spoonacular API key even if the env variable is missing or left as a placeholder
+const rawKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
+let SPOONACULAR_API_KEY;
+
+if (!rawKey || rawKey.includes("${SPOONACULAR_API_KEY}")) {
+  // Either the variable is undefined, or still the literal placeholder string.
+  // <<< IMPORTANT >>> Replace the string below with your actual API key.
+  // Embedding the key in the bundle is not recommended for production,
+  // but this guarantees the app works while you sort out proper env vars.
+  SPOONACULAR_API_KEY = "acfebd3de23e4d08b8868f200ae80d12"; // TODO: replace with your key or remove once env variable is fixed
+  // eslint-disable-next-line no-console
+  console.warn(
+    "Using hard-coded Spoonacular API key. Set VITE_SPOONACULAR_API_KEY in your env file for better security."
+  );
+} else {
+  SPOONACULAR_API_KEY = rawKey;
+}
+
 const SPOONACULAR_BASE_URL = "https://api.spoonacular.com";
 
 // Backend API
